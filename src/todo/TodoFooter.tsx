@@ -13,7 +13,11 @@ export const TodoFooter: React.FC<Props> = ({
   todos,
   filterOption,
   setFilterOption,
+  clearCompleted,
 }) => {
+  const completedTodos = todos.filter(todo => todo.completed);
+  const hasCompleted = completedTodos.length > 0;
+
   return (
     <footer className="todoapp__footer" data-cy="Footer">
       <span className="todo-count" data-cy="TodosCounter">
@@ -59,6 +63,9 @@ export const TodoFooter: React.FC<Props> = ({
         type="button"
         className="todoapp__clear-completed"
         data-cy="ClearCompletedButton"
+        onClick={clearCompleted}
+        disabled={!hasCompleted}
+        style={{ visibility: hasCompleted ? 'visible' : 'hidden' }}
       >
         Clear completed
       </button>

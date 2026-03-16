@@ -60,12 +60,15 @@ export const App: React.FC = () => {
       setErrorMessage(ErrorMessage.delete);
     } finally {
       setProcessings(prev => prev.filter(x => x !== id));
+
+      setTimeout(() => {
+        inputRef.current?.focus();
+      }, 0);
     }
   };
 
   async function handleSubmit(e: FormEvent) {
     e.preventDefault();
-
     const trimmed = todoTitle.trim();
 
     if (!trimmed) {
@@ -82,13 +85,15 @@ export const App: React.FC = () => {
       const created = await addPost(newTodo);
 
       setTodos(prev => [...prev, created]);
-
       setTodoTitle('');
     } catch {
       setErrorMessage(ErrorMessage.add);
     } finally {
       setTempTodo(null);
-      inputRef.current?.focus();
+
+      setTimeout(() => {
+        inputRef.current?.focus();
+      }, 0);
     }
   }
 
@@ -113,6 +118,10 @@ export const App: React.FC = () => {
     }
 
     setProcessings(prev => prev.filter(x => !ids.includes(x)));
+
+    setTimeout(() => {
+      inputRef.current?.focus();
+    }, 0);
   }
 
   const usingTodos = FilteredTodos(todos, filterOption);

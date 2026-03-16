@@ -21,6 +21,7 @@ export const TodoItem: React.FC<Props> = ({
     >
       <label className="todo__status-label" aria-label="Toggle todo status">
         <input
+          data-cy="TodoStatus"
           type="checkbox"
           className="todo__status"
           checked={todo.completed}
@@ -28,7 +29,9 @@ export const TodoItem: React.FC<Props> = ({
         />
       </label>
 
-      <span className="todo__title">{todo.title}</span>
+      <span data-cy="TodoTitle" className="todo__title">
+        {todo.title}
+      </span>
 
       {todo.id !== 0 && (
         <button
@@ -41,12 +44,13 @@ export const TodoItem: React.FC<Props> = ({
         </button>
       )}
 
-      {isProcessed && (
-        <div className="modal overlay is-active" data-cy="TodoLoader">
-          <div className="modal-background has-background-white-ter" />
-          <div className="loader" />
-        </div>
-      )}
+      <div
+        data-cy="TodoLoader"
+        className={classNames('modal overlay', { 'is-active': isProcessed })}
+      >
+        <div className="modal-background has-background-white-ter" />
+        <div className="loader" />
+      </div>
     </div>
   );
 };
